@@ -1,0 +1,23 @@
+name: Main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: macos-latest
+    steps:
+      # actions/checkout can't be included in the composite setup action, because the composite
+      # action needs to be first checked out by the checkout action.
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Preflight checks
+        uses: ./.github/actions/basic-preflight-check

@@ -1,43 +1,22 @@
+import io.github.ackeecz.ackeelities.properties.LibraryProperties
+import io.github.ackeecz.ackeelities.util.Constants
+
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ackeecz.ackeelities.android.application)
 }
 
 android {
-    namespace = "io.github.ackeecz.ackeelities"
-    compileSdk = 35
+    namespace = "${Constants.NAMESPACE_PREFIX}.sample"
 
     defaultConfig {
-        applicationId = "io.github.ackeecz.ackeelities"
-        minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+        applicationId = Constants.NAMESPACE_PREFIX
     }
 }
 
+@Suppress("UseTomlInstead")
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    val bomVersion = LibraryProperties(project).bomArtifactProperties.version
+    implementation(platform("io.github.ackeecz:ackeelities-bom:$bomVersion"))
+    implementation("io.github.ackeecz:ackeelities-core")
 }
