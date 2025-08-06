@@ -1,5 +1,8 @@
 [versions]
 agp = "8.11.1"
+android-activity = "1.10.1"
+android-core = "1.16.0"
+compose-bom = "2025.07.00"
 detekt = "1.23.8"
 dokka = "2.0.0"
 gradle-testLogger = "4.0.0"
@@ -10,6 +13,17 @@ kotest = "5.9.1"
 mavenPublish = "0.34.0"
 
 [libraries]
+android-activity = { module = "androidx.activity:activity", version.ref = "android-activity" }
+android-core = { module = "androidx.core:core-ktx", version.ref = "android-core" }
+
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "android-activity" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-uiTooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
 coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlin-coroutinesBom" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
@@ -37,6 +51,7 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gradle-testLogger = { id = "com.adarshr.test-logger", version.ref = "gradle-testLogger" }
 kotest-multiplatform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 

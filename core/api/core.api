@@ -1,0 +1,43 @@
+public abstract interface class io/github/ackeecz/ackeelities/core/AndroidVersion {
+	public static final field Companion Lio/github/ackeecz/ackeelities/core/AndroidVersion$Companion;
+	public abstract fun isAtLeastBaklava ()Z
+	public abstract fun isAtLeastN ()Z
+	public abstract fun isAtLeastNMR1 ()Z
+	public abstract fun isAtLeastNMR1Patch1 ()Ljava/lang/Boolean;
+	public abstract fun isAtLeastO ()Z
+	public abstract fun isAtLeastOMR1 ()Z
+	public abstract fun isAtLeastP ()Z
+	public abstract fun isAtLeastQ ()Z
+	public abstract fun isAtLeastR ()Z
+	public abstract fun isAtLeastS ()Z
+	public abstract fun isAtLeastSV2 ()Z
+	public abstract fun isAtLeastTiramisu ()Z
+	public abstract fun isAtLeastUpsideDownCake ()Z
+	public abstract fun isAtLeastVanillaIceCream ()Z
+}
+
+public final class io/github/ackeecz/ackeelities/core/AndroidVersion$Companion : io/github/ackeecz/ackeelities/core/AndroidVersion {
+	public fun isAtLeastBaklava ()Z
+	public fun isAtLeastN ()Z
+	public fun isAtLeastNMR1 ()Z
+	public fun isAtLeastNMR1Patch1 ()Ljava/lang/Boolean;
+	public fun isAtLeastO ()Z
+	public fun isAtLeastOMR1 ()Z
+	public fun isAtLeastP ()Z
+	public fun isAtLeastQ ()Z
+	public fun isAtLeastR ()Z
+	public fun isAtLeastS ()Z
+	public fun isAtLeastSV2 ()Z
+	public fun isAtLeastTiramisu ()Z
+	public fun isAtLeastUpsideDownCake ()Z
+	public fun isAtLeastVanillaIceCream ()Z
+}
+
+public final class io/github/ackeecz/ackeelities/core/ContextExtensionsKt {
+	public static final fun areAllPermissionsGranted (Landroid/content/Context;[Ljava/lang/String;)Z
+	public static final fun isPermissionGranted (Landroid/content/Context;Ljava/lang/String;)Z
+	public static final fun navigateToAppSettings (Landroid/content/Context;Z)V
+	public static synthetic fun navigateToAppSettings$default (Landroid/content/Context;ZILjava/lang/Object;)V
+	public static final fun openGooglePlay (Landroid/content/Context;)Z
+}
+
