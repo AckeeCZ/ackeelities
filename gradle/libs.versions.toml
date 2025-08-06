@@ -1,0 +1,48 @@
+[versions]
+agp = "8.11.1"
+detekt = "1.23.8"
+dokka = "2.0.0"
+gradle-testLogger = "4.0.0"
+junit5-bom = "5.13.4"
+kotlin = "2.2.0"
+kotlin-coroutinesBom = "1.10.2"
+kotest = "5.9.1"
+mavenPublish = "0.34.0"
+
+[libraries]
+coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlin-coroutinesBom" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
+
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+junit5-bom = { module = "org.junit:junit-bom", version.ref = "junit5-bom" }
+
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-framework-api = { module = "io.kotest:kotest-framework-api", version.ref = "kotest" }
+kotest-framework-datatest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+
+# Build-logic dependencies
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+mavenPublish-gradlePlugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPublish" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-kmp-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+gradle-testLogger = { id = "com.adarshr.test-logger", version.ref = "gradle-testLogger" }
+kotest-multiplatform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+
+# Convention plugins defined by this project
+ackeecz-ackeelities-android-application = { id = "ackeecz.ackeelities.android.application" }
+ackeecz-ackeelities-kmp-library = { id = "ackeecz.ackeelities.kmp.library" }
+ackeecz-ackeelities-kmp-testing = { id = "ackeecz.ackeelities.kmp.testing" }
+ackeecz-ackeelities-preflightchecks = { id = "ackeecz.ackeelities.preflightchecks" }
+ackeecz-ackeelities-publishing = { id = "ackeecz.ackeelities.publishing" }
