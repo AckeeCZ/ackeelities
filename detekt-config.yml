@@ -33,6 +33,13 @@ formatting:
   Wrapping:
     maxLineLength: 150
 
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+
 style:
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreLocalVariableDeclaration: true
   MaxLineLength:
     maxLineLength: 150

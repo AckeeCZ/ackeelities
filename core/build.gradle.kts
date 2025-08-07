@@ -13,15 +13,10 @@ kotlin {
     }
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(dependencies.platform(libs.coroutines.bom))
-                implementation(libs.coroutines.core)
-            }
-        }
 
-        commonTest {
+        androidMain {
             dependencies {
+                implementation(libs.android.core)
             }
         }
     }
