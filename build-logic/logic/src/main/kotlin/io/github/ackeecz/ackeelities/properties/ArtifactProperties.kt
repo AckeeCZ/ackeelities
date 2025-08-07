@@ -33,6 +33,11 @@ public sealed class ArtifactProperties(
         defaultPropertyPrefix = "CORE",
     )
 
+    public class Coroutines(properties: Properties) : ArtifactProperties(
+        properties = properties,
+        defaultPropertyPrefix = "COROUTINES",
+    )
+
     internal companion object {
 
         fun getFor(
@@ -41,6 +46,7 @@ public sealed class ArtifactProperties(
         ): ArtifactProperties = when (projectName) {
             PublishableProject.Bom.projectName -> Bom(properties)
             PublishableProject.Core.projectName -> Core(properties)
+            PublishableProject.Coroutines.projectName -> Coroutines(properties)
             else -> throw IllegalStateException("Unknown Gradle module with name $projectName. Please " +
                 "add artifact properties for this module and corresponding mapping in " +
                 "${ArtifactProperties::class.simpleName}. It is also possible that you changed module " +

@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="coroutines">
+    <output-path>$PROJECT_DIR$/coroutines/build/libs</output-path>
+    <root id="archive" name="coroutines.jar" />
+  </artifact>
+</component>

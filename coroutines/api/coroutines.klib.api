@@ -1,0 +1,59 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.ackeecz:coroutines>
+abstract interface io.github.ackeecz.ackeelities.coroutines/AppCoroutineScope : kotlinx.coroutines/CoroutineScope { // io.github.ackeecz.ackeelities.coroutines/AppCoroutineScope|null[0]
+    final object Companion { // io.github.ackeecz.ackeelities.coroutines/AppCoroutineScope.Companion|null[0]
+        final fun invoke(kotlin.coroutines/CoroutineContext = ...): io.github.ackeecz.ackeelities.coroutines/AppCoroutineScope // io.github.ackeecz.ackeelities.coroutines/AppCoroutineScope.Companion.invoke|invoke(kotlin.coroutines.CoroutineContext){}[0]
+    }
+}
+
+final class <#A: kotlin/Any?> io.github.ackeecz.ackeelities.coroutines/EventFlow : kotlinx.coroutines.flow/Flow<#A> { // io.github.ackeecz.ackeelities.coroutines/EventFlow|null[0]
+    constructor <init>(kotlin/Int = ...) // io.github.ackeecz.ackeelities.coroutines/EventFlow.<init>|<init>(kotlin.Int){}[0]
+
+    final fun asFlow(): kotlinx.coroutines.flow/Flow<#A> // io.github.ackeecz.ackeelities.coroutines/EventFlow.asFlow|asFlow(){}[0]
+    final fun tryEmit(#A): kotlin/Boolean // io.github.ackeecz.ackeelities.coroutines/EventFlow.tryEmit|tryEmit(1:0){}[0]
+    final suspend fun collect(kotlinx.coroutines.flow/FlowCollector<#A>) // io.github.ackeecz.ackeelities.coroutines/EventFlow.collect|collect(kotlinx.coroutines.flow.FlowCollector<1:0>){}[0]
+}
+
+final class io.github.ackeecz.ackeelities.coroutines/SingleCoroutineLauncher { // io.github.ackeecz.ackeelities.coroutines/SingleCoroutineLauncher|null[0]
+    constructor <init>(kotlinx.coroutines/CoroutineScope) // io.github.ackeecz.ackeelities.coroutines/SingleCoroutineLauncher.<init>|<init>(kotlinx.coroutines.CoroutineScope){}[0]
+
+    final fun launch(kotlin.coroutines/SuspendFunction1<kotlinx.coroutines/CoroutineScope, kotlin/Unit>) // io.github.ackeecz.ackeelities.coroutines/SingleCoroutineLauncher.launch|launch(kotlin.coroutines.SuspendFunction1<kotlinx.coroutines.CoroutineScope,kotlin.Unit>){}[0]
+}
+
+sealed class <#A: out kotlin/Any?> io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult { // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult|null[0]
+    final class <#A1: kotlin/Any?> Error : io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult<#A1> { // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error|null[0]
+        constructor <init>(kotlin/Throwable) // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.<init>|<init>(kotlin.Throwable){}[0]
+
+        final val throwable // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.throwable|{}throwable[0]
+            final fun <get-throwable>(): kotlin/Throwable // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.throwable.<get-throwable>|<get-throwable>(){}[0]
+
+        final fun component1(): kotlin/Throwable // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.component1|component1(){}[0]
+        final fun copy(kotlin/Throwable = ...): io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error<#A1> // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.copy|copy(kotlin.Throwable){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Error.toString|toString(){}[0]
+    }
+
+    final class <#A1: kotlin/Any?> Success : io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult<#A1> { // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success|null[0]
+        constructor <init>(#A1) // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.<init>|<init>(1:0){}[0]
+
+        final val result // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.result|{}result[0]
+            final fun <get-result>(): #A1 // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.result.<get-result>|<get-result>(){}[0]
+
+        final fun component1(): #A1 // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.component1|component1(){}[0]
+        final fun copy(#A1 = ...): io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success<#A1> // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult.Success.toString|toString(){}[0]
+    }
+}
+
+final fun <#A: kotlin/Any?> (kotlinx.coroutines.flow/Flow<#A>).io.github.ackeecz.ackeelities.coroutines/launchIn(io.github.ackeecz.ackeelities.coroutines/SingleCoroutineLauncher) // io.github.ackeecz.ackeelities.coroutines/launchIn|launchIn@kotlinx.coroutines.flow.Flow<0:0>(io.github.ackeecz.ackeelities.coroutines.SingleCoroutineLauncher){0§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?> (io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult<#A>).io.github.ackeecz.ackeelities.coroutines/catch(kotlin/Function1<kotlin/Throwable, #A>): #A // io.github.ackeecz.ackeelities.coroutines/catch|catch@io.github.ackeecz.ackeelities.coroutines.TryCoroutineResult<0:0>(kotlin.Function1<kotlin.Throwable,0:0>){0§<kotlin.Any?>}[0]
+final suspend inline fun <#A: kotlin/Any?> io.github.ackeecz.ackeelities.coroutines/tryCoroutine(kotlin/Function0<#A>): io.github.ackeecz.ackeelities.coroutines/TryCoroutineResult<#A> // io.github.ackeecz.ackeelities.coroutines/tryCoroutine|tryCoroutine(kotlin.Function0<0:0>){0§<kotlin.Any?>}[0]

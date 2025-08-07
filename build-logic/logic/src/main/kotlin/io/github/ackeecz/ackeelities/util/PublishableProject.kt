@@ -13,4 +13,9 @@ internal sealed interface PublishableProject {
 
         override val projectName = "core"
     }
+
+    object Coroutines : PublishableProject {
+
+        override val projectName = "coroutines"
+    }
 }
