@@ -27,15 +27,11 @@ internal class KmpTestingPlugin : Plugin<Project> {
             }
 
             sourceSets.commonTest.dependencies {
-
-                // Coroutines
-                implementation(dependencies.platform(libs.coroutines.bom))
-                implementation(libs.coroutines.test)
-
                 // Kotest
                 implementation(libs.kotest.assertions.core)
                 implementation(libs.kotest.framework.api)
                 implementation(libs.kotest.framework.datatest)
+                implementation(libs.kotest.framework.engine)
             }
 
             sourceSets.androidHostTest.dependencies {

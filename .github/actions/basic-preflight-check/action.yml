@@ -13,13 +13,31 @@ runs:
       shell: bash
       run: ./gradlew detekt
 
-    - name: Assemble release variant
+    - name: Assemble KMP Android
       shell: bash
       run: ./gradlew assembleAndroidMain
 
-    - name: Library tests
+    - name: Assemble KMP iOS
       shell: bash
-      run: ./gradlew testAndroidHostTest testDebugUnitTest -x :app:testDebugUnitTest
+      run: ./gradlew compileKotlinIosSimulatorArm64
+
+    - name: Assemble Android library
+      shell: bash
+      run: ./gradlew assembleRelease -x :app:assembleRelease
+
+    - name: KMP Android tests
+      shell: bash
+      run: ./gradlew testAndroidHostTest
+
+      # TODO Currently fails on internal Kotlin error. Seems like there is some incompatibility
+      #  between current Kotlin and Kotest versions.
+#    - name: KMP iOS tests
+#      shell: bash
+#      run: ./gradlew iosSimulatorArm64Test
+
+    - name: Android library tests
+      shell: bash
+      run: ./gradlew testReleaseUnitTest -x :app:testReleaseUnitTest
 
     - name: Binary compatibility check
       shell: bash
