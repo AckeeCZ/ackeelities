@@ -63,25 +63,47 @@ internal abstract class RegisterPreflightChecksPlugin : Plugin<Project> {
         }
 
         private fun Task.dependsOnAssemble() {
+            // KMP Android
             dependsOnTaskFromProjects(
                 taskName = "assembleAndroidMain",
+                projects = currentProject.subprojects,
+            )
+            // KMP iOS
+            dependsOnTaskFromProjects(
+                taskName = "compileKotlinIosSimulatorArm64",
+                projects = currentProject.subprojects,
+            )
+            // Android library modules
+            dependsOnTaskFromProjects(
+                taskName = "assembleRelease",
                 projects = currentProject.subprojects.filterNot { it.name == SAMPLE_APP_NAME },
+                // There are currently no Android library modules in the project, so we don't want
+                // to fail the check because of this, but we want to be sure that it will run if
+                // there are any in the future.
+                failIfNotFoundInAnyProject = false,
             )
         }
 
         private fun Task.dependsOnLibraryTests() {
-            // KMP modules' Android unit tests
+            // KMP modules' Android host tests
             dependsOnTaskFromProjects(
                 taskName = "testAndroidHostTest",
                 projects = currentProject.subprojects,
             )
+            // KMP modules' iOS host tests
+            // TODO Currently fails on internal Kotlin error. Seems like there is some incompatibility
+            //  between current Kotlin and Kotest versions.
+//            dependsOnTaskFromProjects(
+//                taskName = "iosSimulatorArm64Test",
+//                projects = currentProject.subprojects,
+//            )
             // Android library modules' unit tests
             dependsOnTaskFromProjects(
-                taskName = "testDebugUnitTest",
+                taskName = "testReleaseUnitTest",
                 projects = currentProject.subprojects.filterNot { it.name == SAMPLE_APP_NAME },
                 // There are currently no Android library modules in the project, so we don't want
-                // to fail the check because of this, but we want to be sure that the tests will
-                // run if there are any in the future.
+                // to fail the check because of this, but we want to be sure that it will run if
+                // there are any in the future.
                 failIfNotFoundInAnyProject = false,
             )
         }
