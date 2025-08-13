@@ -1,5 +1,6 @@
 package io.github.ackeecz.ackeelities.core
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -34,14 +35,15 @@ public fun Context.navigateToAppSettings(newTask: Boolean = false) {
 }
 
 /**
- * Opens Google Play with the application ID from provided context. Return true if the intent can be
- * and will be handled, false otherwise.
+ * Opens Google Play with the application ID from provided context. Return true if Google Play
+ * was opened, false otherwise.
  */
 public fun Context.openGooglePlay(): Boolean {
     val intent = Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri())
-    val canBeOpened = packageManager.queryIntentActivities(intent, 0).isNotEmpty()
-    if (canBeOpened) {
+    return try {
         startActivity(intent)
+        true
+    } catch (_: ActivityNotFoundException) {
+        false
     }
-    return canBeOpened
 }
