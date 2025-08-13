@@ -12,6 +12,7 @@ KMP library that provides a set of utilities for KMP projects.
 Library consists of several modules:
 - `core` contains general-purpose utilities that are not tied to a specific library. There should be just basic utilities
 that are built on top of regular Kotlin APIs.
+- `coroutines` contains utilities for coroutines, such as `AppCoroutineScope`.
 
 ## Setup
 
