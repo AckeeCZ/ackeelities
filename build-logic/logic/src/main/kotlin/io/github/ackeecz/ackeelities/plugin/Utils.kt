@@ -24,7 +24,7 @@ internal fun PluginManager.apply(plugin: Provider<PluginDependency>) {
     apply(plugin.get().pluginId)
 }
 
-public val NamedDomainObjectContainer<KotlinSourceSet>.androidHostTest: KotlinSourceSet
+internal val NamedDomainObjectContainer<KotlinSourceSet>.androidHostTest: KotlinSourceSet
     get() = getByName("androidHostTest")
 
 internal fun Project.androidBase(action: BaseExtension.() -> Unit) {
