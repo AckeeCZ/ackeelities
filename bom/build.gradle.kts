@@ -9,6 +9,7 @@ plugins {
 dependencies {
     constraints {
         api(projects.core)
+        api(projects.coroutines)
     }
 }
 

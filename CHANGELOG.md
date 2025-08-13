@@ -11,6 +11,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
 
+## BOM [1.0.1] - 2025-08-13
+
+### coroutines
+#### Fixed
+- Missing dependency on coroutines artifact in the BOM.
+
+
+
 ## BOM [1.0.0] - 2025-08-13
 
 ### core
