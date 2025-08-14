@@ -102,7 +102,7 @@ private fun Project.configurePublishingSkipping(groupId: String, artifactId: Str
             val isUnexpectedStatusCode = httpStatusCode !in artifactPublishedStatusCodes &&
                     httpStatusCode != artifactNotPublishedStatusCode
             if (isUnexpectedStatusCode) {
-                throw RuntimeException("Unexpected HTTP status code $httpStatusCode for URL: $url")
+                error("Unexpected HTTP status code $httpStatusCode for URL: $url")
             }
             return@onlyIf (httpStatusCode == artifactNotPublishedStatusCode)
         }
