@@ -6,7 +6,13 @@ import io.github.ackeecz.ackeelities.verification.task.CheckIfUpdateNeededSinceC
 import io.github.ackeecz.ackeelities.verification.task.VerifyPublishingTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
 
 internal class PublishingPlugin : Plugin<Project> {
 
@@ -59,8 +65,47 @@ internal class PublishingPlugin : Plugin<Project> {
             publishToMavenCentral()
         }
 
+        configurePublishingSkipping(
+            groupId = libraryProperties.groupId,
+            artifactId = artifactProperties.id,
+            version = artifactProperties.version,
+        )
         CheckIfUpdateNeededSinceCurrentTagTask.registerFor(project)
         VerifyPublishingTask.registerFor(project)
+    }
+}
+
+/**
+ * Configures publishing skipping, if the artifact with the given [version] already exists in
+ * the Maven Central repository. This allows us to conveniently run a single publishing task
+ * everytime, without worrying about what actually can be published.
+ */
+private fun Project.configurePublishingSkipping(groupId: String, artifactId: String, version: String) {
+    tasks.withType<PublishToMavenRepository>().configureEach {
+        onlyIf {
+            val groupIdPath = groupId.replace('.', '/')
+            val url = "https://repo1.maven.org/maven2/$groupIdPath/$artifactId/$version"
+            val request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build()
+            val client = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build()
+            val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+            val httpStatusCode = response.statusCode()
+            // We fail the task if we get unexpected error or redirect, except 404 which is expected.
+            // Unexpected status codes might potentially lead to publishing issues, because we can't be
+            // sure if the artifact is already published or not, so it is better to fail the task.
+            val artifactPublishedStatusCodes = 200..299
+            val artifactNotPublishedStatusCode = 404
+            val isUnexpectedStatusCode = httpStatusCode !in artifactPublishedStatusCodes &&
+                    httpStatusCode != artifactNotPublishedStatusCode
+            if (isUnexpectedStatusCode) {
+                throw RuntimeException("Unexpected HTTP status code $httpStatusCode for URL: $url")
+            }
+            return@onlyIf (httpStatusCode == artifactNotPublishedStatusCode)
+        }
     }
 }
 
