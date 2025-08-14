@@ -26,6 +26,7 @@ ackee-ackeelities-bom = "SPECIFY_VERSION"
 [libraries]
 ackee-ackeelities-bom = { module = "io.github.ackeecz:ackeelities-bom", version.ref = "ackee-ackeelities-bom" }
 ackee-ackeelities-core = { module = "io.github.ackeecz:ackeelities-core" }
+ackee-ackeelities-coroutines = { module = "io.github.ackeecz:ackeelities-coroutines" }
 ```
 
 Then specify dependencies in your `build.gradle.kts`:
@@ -36,6 +37,7 @@ dependencies {
     // Always use BOM
     implementation(platform(libs.ackee.ackeelities.bom))
     implementation(libs.ackee.ackeelities.core)
+    implementation(libs.ackee.ackeelities.coroutines)
 }
 ```
 
