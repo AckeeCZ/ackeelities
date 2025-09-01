@@ -1,11 +1,13 @@
 package io.github.ackeecz.ackeelities.coroutines
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.booleans.shouldBeTrue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.cancellation.CancellationException
 
 private lateinit var underTest: SingleCoroutineLauncher
@@ -64,5 +66,15 @@ internal class SingleCoroutineLauncherTest : FunSpec({
         underTest.cancel()
 
         wasPreviousLaunchCancelled.shouldBeTrue()
+    }
+
+    test("async cancellation is correctly handled") {
+        runTest {
+            val single = SingleCoroutineLauncher(this)
+            val async = single.async {}
+
+            single.cancel()
+            shouldThrow<CancellationException> { async.await() }
+        }
     }
 })

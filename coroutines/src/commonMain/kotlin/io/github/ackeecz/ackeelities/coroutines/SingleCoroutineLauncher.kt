@@ -1,9 +1,12 @@
 package io.github.ackeecz.ackeelities.coroutines
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
 /**
@@ -21,6 +24,15 @@ public class SingleCoroutineLauncher(private val coroutineScope: CoroutineScope)
     public fun launch(action: suspend CoroutineScope.() -> Unit) {
         job = coroutineScope.launch {
             action(this)
+        }
+    }
+
+    public fun <T> async(action: suspend (CoroutineScope) -> T): Deferred<T> {
+        return coroutineScope.async {
+            action(this)
+        }.also {
+            cancel()
+            job = it.job
         }
     }
 
