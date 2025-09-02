@@ -23,6 +23,10 @@ public class SingleCoroutineLauncher(private val coroutineScope: CoroutineScope)
             action(this)
         }
     }
+
+    public fun cancel() {
+        job = null
+    }
 }
 
 public fun <T> Flow<T>.launchIn(singleCoroutineLauncher: SingleCoroutineLauncher) {
