@@ -49,4 +49,20 @@ internal class SingleCoroutineLauncherTest : FunSpec({
 
         wasPreviousLaunchCancelled.shouldBeTrue()
     }
+
+    test("cancel function cancels job") {
+        var wasPreviousLaunchCancelled = false
+        underTest.launch {
+            try {
+                suspendCoroutine()
+            } catch (e: CancellationException) {
+                wasPreviousLaunchCancelled = true
+                throw e
+            }
+        }
+
+        underTest.cancel()
+
+        wasPreviousLaunchCancelled.shouldBeTrue()
+    }
 })
