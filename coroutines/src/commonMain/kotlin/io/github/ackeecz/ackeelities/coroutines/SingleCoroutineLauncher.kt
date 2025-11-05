@@ -31,7 +31,6 @@ public class SingleCoroutineLauncher(private val coroutineScope: CoroutineScope)
         return coroutineScope.async {
             action(this)
         }.also {
-            cancel()
             job = it.job
         }
     }
