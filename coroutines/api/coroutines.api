@@ -17,6 +17,7 @@ public final class io/github/ackeecz/ackeelities/coroutines/EventFlow : kotlinx/
 
 public final class io/github/ackeecz/ackeelities/coroutines/SingleCoroutineLauncher {
 	public fun <init> (Lkotlinx/coroutines/CoroutineScope;)V
+	public final fun async (Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
 	public final fun cancel ()V
 	public final fun launch (Lkotlin/jvm/functions/Function2;)V
 }

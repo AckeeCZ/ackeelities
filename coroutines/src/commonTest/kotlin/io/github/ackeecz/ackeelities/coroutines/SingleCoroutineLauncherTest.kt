@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlin.coroutines.cancellation.CancellationException
 
 private lateinit var underTest: SingleCoroutineLauncher
 
@@ -16,17 +15,18 @@ internal class SingleCoroutineLauncherTest : FunSpec({
         underTest = SingleCoroutineLauncher(CoroutineScope(UnconfinedTestDispatcher()))
     }
 
-    suspend fun suspendCoroutine() = suspendCancellableCoroutine<Unit> {}
+    suspend fun suspendCoroutine(onCancellation: () -> Unit) = suspendCancellableCoroutine<Unit> { continuation ->
+        continuation.invokeOnCancellation { onCancellation() }
+    }
 
-    test("new launch cancels previous launch") {
+    test("new launch cancels job started by previous launch") {
         var wasPreviousLaunchCancelled = false
         underTest.launch {
-            try {
-                suspendCoroutine()
-            } catch (e: CancellationException) {
-                wasPreviousLaunchCancelled = true
-                throw e
-            }
+            suspendCoroutine(
+                onCancellation = {
+                    wasPreviousLaunchCancelled = true
+                }
+            )
         }
 
         underTest.launch {}
@@ -34,15 +34,14 @@ internal class SingleCoroutineLauncherTest : FunSpec({
         wasPreviousLaunchCancelled.shouldBeTrue()
     }
 
-    test("new launchIn cancels previous launchIn") {
+    test("new launchIn cancels job started by previous launchIn") {
         var wasPreviousLaunchCancelled = false
         flow<Unit> {
-            try {
-                suspendCoroutine()
-            } catch (e: CancellationException) {
-                wasPreviousLaunchCancelled = true
-                throw e
-            }
+            suspendCoroutine(
+                onCancellation = {
+                    wasPreviousLaunchCancelled = true
+                }
+            )
         }.launchIn(underTest)
 
         flow<Unit> {}.launchIn(underTest)
@@ -50,18 +49,47 @@ internal class SingleCoroutineLauncherTest : FunSpec({
         wasPreviousLaunchCancelled.shouldBeTrue()
     }
 
-    test("cancel function cancels job") {
+    test("cancel function cancels job started by launch") {
         var wasPreviousLaunchCancelled = false
         underTest.launch {
-            try {
-                suspendCoroutine()
-            } catch (e: CancellationException) {
-                wasPreviousLaunchCancelled = true
-                throw e
-            }
+            suspendCoroutine(
+                onCancellation = {
+                    wasPreviousLaunchCancelled = true
+                }
+            )
         }
 
         underTest.cancel()
+
+        wasPreviousLaunchCancelled.shouldBeTrue()
+    }
+
+    test("cancel function cancels job started by async") {
+        var wasPreviousLaunchCancelled = false
+        underTest.async {
+            suspendCoroutine(
+                onCancellation = {
+                    wasPreviousLaunchCancelled = true
+                }
+            )
+        }
+
+        underTest.cancel()
+
+        wasPreviousLaunchCancelled.shouldBeTrue()
+    }
+
+    test("new async cancels job started by previous async") {
+        var wasPreviousLaunchCancelled = false
+        underTest.async {
+            suspendCoroutine(
+                onCancellation = {
+                    wasPreviousLaunchCancelled = true
+                }
+            )
+        }
+
+        underTest.async {}
 
         wasPreviousLaunchCancelled.shouldBeTrue()
     }
