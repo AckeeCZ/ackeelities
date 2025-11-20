@@ -6,4 +6,5 @@ that could be added to the library, feel free to open an issue.
 ## PR
 Before submitting a PR, please make sure that:
 - You added tests that cover your changes.
+- You updated `CHANGELOG` if necessary. There is an `Unreleased` section at the top of the file.
 - You ran `./gradlew preMergeRequestCheck` preflight checks and all passed.
