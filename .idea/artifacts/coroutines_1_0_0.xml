@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="coroutines-1.0.0">
-    <output-path>$PROJECT_DIR$/coroutines/build/libs</output-path>
-    <root id="archive" name="coroutines-1.0.0.jar">
-      <element id="module-output" name="ackeelities.coroutines.androidMain" />
-    </root>
-  </artifact>
-</component>
