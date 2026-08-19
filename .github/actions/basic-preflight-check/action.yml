@@ -21,9 +21,16 @@ runs:
       shell: bash
       run: ./gradlew compileKotlinIosSimulatorArm64
 
-    - name: Assemble Android library
-      shell: bash
-      run: ./gradlew assembleRelease -x :app:assembleRelease
+      # There are currently no Android library modules in the project, so the Android library steps
+      # are disabled. Unlike preMergeRequestCheck (which tolerates a missing task via
+      # failIfNotFoundInAnyProject = false), an unqualified task name on the command line fails the
+      # build when no project has the task. These steps used to pass only by accident: the :app
+      # module made the task names resolvable and -x excluded its only match. AGP 9 no longer
+      # creates release unit tests for the app, which is why "Android library tests" started
+      # failing. Re-enable these steps when an Android library module is added.
+#    - name: Assemble Android library
+#      shell: bash
+#      run: ./gradlew assembleRelease -x :app:assembleRelease
 
     - name: KMP Android tests
       shell: bash
@@ -35,9 +42,10 @@ runs:
 #      shell: bash
 #      run: ./gradlew iosSimulatorArm64Test
 
-    - name: Android library tests
-      shell: bash
-      run: ./gradlew testReleaseUnitTest -x :app:testReleaseUnitTest
+      # Disabled: no Android library modules in the project, see the comment above.
+#    - name: Android library tests
+#      shell: bash
+#      run: ./gradlew testReleaseUnitTest -x :app:testReleaseUnitTest
 
     - name: Binary compatibility check
       shell: bash
