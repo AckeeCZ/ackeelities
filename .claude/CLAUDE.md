@@ -44,6 +44,9 @@ enabled in `KmpLibraryPlugin`), using its **legacy dump** format.
 - Dumps live at `<module>/api/<module>.api` (Android/JVM) **and** `<module>/api/<module>.klib.api`
   (klib validation for iOS targets) and are committed. Any change to a `public` declaration must be
   reflected there.
+- **Known Kotlin 2.4 regression**: only the klib dumps are currently generated and validated — the
+  Android target of the AGP KMP plugin is not seen by ABI validation, so `<module>.api` files are a
+  frozen last-known-good baseline, not checked by the build (see the TODO in `KmpLibraryPlugin`).
 
 Workflow when public API changes:
 

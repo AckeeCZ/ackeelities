@@ -26,6 +26,14 @@ internal class KmpLibraryPlugin : Plugin<Project> {
             // Kotlin 2.4 removed AbiValidationExtension.enabled (calling abiValidation() is what
             // enables it) and the klib { } block (klib dumps are now always generated for klib-based
             // targets); keepUnsupportedTargets moved up and was renamed keepLocallyUnsupportedTargets.
+            // TODO Kotlin 2.4 regression: the Android target of the AGP KMP plugin is no longer
+            //  dumped or validated - both the legacy (checkLegacyAbi) and unified (checkKotlinAbi)
+            //  dumps contain only the iOS klib ABI, so the Android public API is currently
+            //  untracked. Kotlin 2.3.21 + com.android.kotlin.multiplatform.library still dumps it
+            //  (api/android/<module>.api, see the apythia repo) and AGP downgrade alone does not
+            //  help, so this broke in the Kotlin 2.4 ABI validation rework. The committed
+            //  <module>/api/<module>.api dumps are the frozen last-known-good Android baseline -
+            //  keep them and re-check on every Kotlin update.
             @OptIn(ExperimentalAbiValidation::class)
             abiValidation {
                 keepLocallyUnsupportedTargets.set(false)
