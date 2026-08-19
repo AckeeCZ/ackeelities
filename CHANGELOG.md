@@ -7,7 +7,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### core
+#### Changed
+- Built with Kotlin 2.4.10 (was 2.2.0). Consumers need Kotlin 2.4 or newer — older compilers cannot
+  read the artifact's metadata.
+
 ### coroutines
+#### Changed
+- Built with Kotlin 2.4.10 (was 2.2.0). Consumers need Kotlin 2.4 or newer — older compilers cannot
+  read the artifact's metadata.
+- Built against kotlinx.coroutines 1.11.0 (was 1.10.2).
 
 ## BOM [1.1.0] - 2025-11-20
 

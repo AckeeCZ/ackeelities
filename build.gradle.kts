@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.dokka) apply false
     alias(libs.plugins.gradle.testLogger) apply false
-    alias(libs.plugins.kotest.multiplatform) apply false
-    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.gradle.versions) apply true
+    alias(libs.plugins.ackeecz.ackeelities.dependency.updates) apply true
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.mavenPublish) apply false

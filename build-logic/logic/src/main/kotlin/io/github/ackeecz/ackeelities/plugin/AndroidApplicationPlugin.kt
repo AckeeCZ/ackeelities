@@ -19,8 +19,8 @@ internal class AndroidApplicationPlugin : Plugin<Project> {
     }
 
     private fun Project.configure() {
+        // AGP 9 compiles Kotlin itself (built-in Kotlin); org.jetbrains.kotlin.android must NOT be applied
         pluginManager.apply(libs.plugins.android.application)
-        pluginManager.apply(libs.plugins.kotlin.android)
 
         androidApp {
 
@@ -32,8 +32,13 @@ internal class AndroidApplicationPlugin : Plugin<Project> {
 
             buildTypes {
                 release {
-                    isMinifyEnabled = true
-                    proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+                    // AGP 9.3+ optimization DSL. Enabling it turns on both code optimization and
+                    // optimized resource shrinking and implies the default Android keep rules, so
+                    // neither isMinifyEnabled nor getDefaultProguardFile() needs to be specified.
+                    // Project-specific keep rules belong to the src/release/keepRules/*.keep source set.
+                    optimization {
+                        enable = true
+                    }
                 }
             }
         }

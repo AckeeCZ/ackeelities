@@ -1,6 +1,5 @@
 package io.github.ackeecz.ackeelities.plugin
 
-import com.android.build.api.dsl.androidLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
@@ -17,11 +16,10 @@ internal class KmpTestingPlugin : Plugin<Project> {
 
     @Suppress("UnstableApiUsage")
     private fun Project.configure() {
-        pluginManager.apply(libs.plugins.kotest.multiplatform)
         pluginManager.apply(libs.plugins.gradle.testLogger)
 
         kotlin {
-            androidLibrary {
+            android {
                 // This nice config enables Android host (local unit) tests in KMP module 🫠
                 withHostTestBuilder {}.configure {}
             }
@@ -29,19 +27,17 @@ internal class KmpTestingPlugin : Plugin<Project> {
             sourceSets.commonTest.dependencies {
                 // Kotest
                 implementation(libs.kotest.assertions.core)
-                implementation(libs.kotest.framework.api)
-                implementation(libs.kotest.framework.datatest)
                 implementation(libs.kotest.framework.engine)
             }
 
             sourceSets.androidHostTest.dependencies {
                 implementation(dependencies.platform(libs.junit5.bom))
-                runtimeOnly(libs.kotest.runner.junit5)
+                runtimeOnly(libs.kotest.runner.junit6)
             }
         }
 
         // It seems like there is currently no way how enable JUnit Platform using Android KMP
-        // plugin (androidLibrary {})
+        // plugin (android {})
         tasks.withType<Test> {
             useJUnitPlatform()
         }

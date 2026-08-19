@@ -1,6 +1,5 @@
 package io.github.ackeecz.ackeelities.plugin
 
-import com.android.build.api.dsl.androidLibrary
 import io.github.ackeecz.ackeelities.util.Constants
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -24,20 +23,19 @@ internal class KmpLibraryPlugin : Plugin<Project> {
         kotlin {
             explicitApi()
 
+            // Kotlin 2.4 removed AbiValidationExtension.enabled (calling abiValidation() is what
+            // enables it) and the klib { } block (klib dumps are now always generated for klib-based
+            // targets); keepUnsupportedTargets moved up and was renamed keepLocallyUnsupportedTargets.
             @OptIn(ExperimentalAbiValidation::class)
             abiValidation {
-                enabled.set(true)
-                klib {
-                    enabled.set(true)
-                    keepUnsupportedTargets.set(false)
-                }
+                keepLocallyUnsupportedTargets.set(false)
             }
 
             compilerOptions {
                 configureCommonOptions()
             }
 
-            androidLibrary {
+            android {
                 compileSdk = Constants.COMPILE_SDK
                 minSdk = Constants.MIN_SDK
 
@@ -51,8 +49,9 @@ internal class KmpLibraryPlugin : Plugin<Project> {
                 }
 
                 optimization {
+                    // Consumer keep rules are picked up by convention from the
+                    // src/androidMain/keepRules/*.keep source set (AGP 9.3+)
                     consumerKeepRules.publish = true
-                    consumerKeepRules.file("consumer-rules.pro")
                     minify = false
                 }
             }
