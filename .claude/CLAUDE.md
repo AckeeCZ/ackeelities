@@ -5,8 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 Ackeelities is a published **Kotlin Multiplatform (KMP) utility library** by Ackee. Targets are
-Android (via the AGP KMP plugin `com.android.kotlin.multiplatform.library`) and iOS (iosX64,
-iosArm64, iosSimulatorArm64).
+Android (via the AGP KMP plugin `com.android.kotlin.multiplatform.library`) and iOS (iosArm64,
+iosSimulatorArm64).
 
 - Root package: `io.github.ackeecz.ackeelities`
 - Maven coordinates: `io.github.ackeecz:ackeelities-*` (see `lib.properties`)

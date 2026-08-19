@@ -29,6 +29,7 @@ dependencies {
 
     val bomVersion = LibraryProperties(project).bomArtifactProperties.version
     implementation(platform("io.github.ackeecz:ackeelities-bom:$bomVersion"))
+    implementation("io.github.ackeecz:ackeelities-compose")
     implementation("io.github.ackeecz:ackeelities-core")
     implementation("io.github.ackeecz:ackeelities-coroutines")
 

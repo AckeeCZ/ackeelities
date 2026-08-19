@@ -57,11 +57,6 @@ internal class KmpLibraryPlugin : Plugin<Project> {
             }
 
             val xcfName = "${project.name}Kit"
-            iosX64 {
-                binaries.framework {
-                    baseName = xcfName
-                }
-            }
             iosArm64 {
                 binaries.framework {
                     baseName = xcfName

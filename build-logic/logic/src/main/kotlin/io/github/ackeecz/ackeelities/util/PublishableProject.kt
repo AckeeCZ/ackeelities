@@ -9,6 +9,11 @@ internal sealed interface PublishableProject {
         override val projectName = "bom"
     }
 
+    object Compose : PublishableProject {
+
+        override val projectName = "compose"
+    }
+
     object Core : PublishableProject {
 
         override val projectName = "core"

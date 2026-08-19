@@ -28,6 +28,11 @@ public sealed class ArtifactProperties(
         defaultPropertyPrefix = "BOM",
     )
 
+    public class Compose(properties: Properties) : ArtifactProperties(
+        properties = properties,
+        defaultPropertyPrefix = "COMPOSE",
+    )
+
     public class Core(properties: Properties) : ArtifactProperties(
         properties = properties,
         defaultPropertyPrefix = "CORE",
@@ -45,6 +50,7 @@ public sealed class ArtifactProperties(
             properties: Properties,
         ): ArtifactProperties = when (projectName) {
             PublishableProject.Bom.projectName -> Bom(properties)
+            PublishableProject.Compose.projectName -> Compose(properties)
             PublishableProject.Core.projectName -> Core(properties)
             PublishableProject.Coroutines.projectName -> Coroutines(properties)
             else -> throw IllegalStateException("Unknown Gradle module with name $projectName. Please " +
