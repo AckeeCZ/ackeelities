@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### compose
+### core
+### coroutines
+
+## BOM [2.0.0] - TBD
+### compose
 #### Added
 - First version of the artifact 🎉
 - New `CollectLifecycleAware` composable extension on `Flow` that collects the flow in a lifecycle-aware manner
