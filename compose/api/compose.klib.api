@@ -1,0 +1,9 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.ackeecz:compose>
+final fun <#A: kotlin/Any?> (kotlinx.coroutines.flow/Flow<#A>).io.github.ackeecz.ackeelities.compose/CollectLifecycleAware(androidx.lifecycle/Lifecycle.State?, kotlin.coroutines/SuspendFunction1<#A, kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // io.github.ackeecz.ackeelities.compose/CollectLifecycleAware|CollectLifecycleAware@kotlinx.coroutines.flow.Flow<0:0>(androidx.lifecycle.Lifecycle.State?;kotlin.coroutines.SuspendFunction1<0:0,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]

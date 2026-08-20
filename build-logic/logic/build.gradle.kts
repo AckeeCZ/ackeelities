@@ -22,14 +22,14 @@ dependencies {
     compileOnly(files(libs::class.java.superclass.protectionDomain.codeSource.location))
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
+    compileOnly(libs.gradleVersions.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.mavenPublish.gradlePlugin)
 
     testImplementation(platform(libs.junit5.bom))
     testImplementation(libs.kotest.assertions.core)
-    testImplementation(libs.kotest.framework.api)
-    testImplementation(libs.kotest.framework.datatest)
-    testRuntimeOnly(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.framework.engine)
+    testRuntimeOnly(libs.kotest.runner.junit6)
 }
 
 gradlePlugin {
@@ -37,6 +37,11 @@ gradlePlugin {
         plugin(
             dependency = libs.plugins.ackeecz.ackeelities.android.application,
             pluginClassSimpleName = "AndroidApplicationPlugin",
+        )
+
+        plugin(
+            dependency = libs.plugins.ackeecz.ackeelities.dependency.updates,
+            pluginClassSimpleName = "DependencyUpdatesPlugin",
         )
 
         plugin(

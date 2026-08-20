@@ -10,6 +10,7 @@ KMP library that provides a set of utilities for KMP projects.
 ## Architecture
 
 Library consists of several modules:
+- `compose` contains utilities for the Compose UI framework, such as `CollectLifecycleAware`.
 - `core` contains general-purpose utilities that are not tied to a specific library. There should be just basic utilities
 that are built on top of regular Kotlin APIs.
 - `coroutines` contains utilities for coroutines, such as `AppCoroutineScope`.
@@ -25,6 +26,7 @@ ackee-ackeelities-bom = "SPECIFY_VERSION"
 
 [libraries]
 ackee-ackeelities-bom = { module = "io.github.ackeecz:ackeelities-bom", version.ref = "ackee-ackeelities-bom" }
+ackee-ackeelities-compose = { module = "io.github.ackeecz:ackeelities-compose" }
 ackee-ackeelities-core = { module = "io.github.ackeecz:ackeelities-core" }
 ackee-ackeelities-coroutines = { module = "io.github.ackeecz:ackeelities-coroutines" }
 ```
@@ -36,6 +38,7 @@ dependencies {
 
     // Always use BOM
     implementation(platform(libs.ackee.ackeelities.bom))
+    implementation(libs.ackee.ackeelities.compose)
     implementation(libs.ackee.ackeelities.core)
     implementation(libs.ackee.ackeelities.coroutines)
 }

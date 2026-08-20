@@ -8,6 +8,7 @@ plugins {
 
 dependencies {
     constraints {
+        api(projects.compose)
         api(projects.core)
         api(projects.coroutines)
     }

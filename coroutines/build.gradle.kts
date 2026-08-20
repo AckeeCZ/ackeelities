@@ -8,7 +8,7 @@ plugins {
 
 kotlin {
 
-    androidLibrary {
+    android {
         namespace = "${Constants.NAMESPACE_PREFIX}.coroutines"
     }
 
@@ -21,6 +21,14 @@ kotlin {
             dependencies {
                 implementation(dependencies.platform(libs.coroutines.bom))
                 implementation(libs.coroutines.core)
+            }
+        }
+
+        commonTest {
+            dependencies {
+                // Kotest 6 no longer brings kotlinx-coroutines-test transitively
+                implementation(dependencies.platform(libs.coroutines.bom))
+                implementation(libs.coroutines.test)
             }
         }
     }

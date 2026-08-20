@@ -29,5 +29,6 @@ includeBuild("build-logic")
 
 include(":app")
 include(":bom")
+include(":compose")
 include(":core")
 include(":coroutines")
