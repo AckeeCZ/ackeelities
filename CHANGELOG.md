@@ -10,7 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### core
 ### coroutines
 
-## BOM [2.0.0] - TBD
+## BOM [2.0.0] - 2026-08-20
 ### compose
 #### Added
 - First version of the artifact 🎉
