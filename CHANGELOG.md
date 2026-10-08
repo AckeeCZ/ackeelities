@@ -8,6 +8,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 ### compose
 ### core
+#### Added
+- `AndroidVersion.isAtLeastCinnamonBun()` to check for Android 17 (API 37)
 ### coroutines
 
 ## BOM [2.0.0] - 2026-08-20
