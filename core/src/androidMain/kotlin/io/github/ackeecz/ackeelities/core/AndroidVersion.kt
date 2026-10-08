@@ -59,6 +59,9 @@ public interface AndroidVersion {
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.BAKLAVA)
     public fun isAtLeastBaklava(): Boolean
 
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.CINNAMON_BUN)
+    public fun isAtLeastCinnamonBun(): Boolean
+
     public companion object : AndroidVersion {
 
         private val androidPatchVersionChecker = AndroidPatchVersionChecker(
@@ -136,6 +139,11 @@ public interface AndroidVersion {
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.BAKLAVA)
         override fun isAtLeastBaklava(): Boolean {
             return Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA
+        }
+
+        @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.CINNAMON_BUN)
+        override fun isAtLeastCinnamonBun(): Boolean {
+            return Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN
         }
     }
 }
